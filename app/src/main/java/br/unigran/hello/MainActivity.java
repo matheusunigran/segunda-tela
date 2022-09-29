@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,11 +19,24 @@ public class MainActivity extends AppCompatActivity {
         nome = findViewById(R.id.nameid);
     }
 
-    public void next(View view){
-        Intent it = new Intent(this, SegundaActivity.class);
-        it.putExtra("Nome",nome.getText());
+    public boolean verificar(){
+        String nomeUsuario = nome.getText().toString();
 
-        startActivity(it);
-        onBackPressed();
+        if ((nomeUsuario.equals(null) || (nomeUsuario.equals("")))) {
+            Toast.makeText(this, "Adicione um dado", Toast.LENGTH_SHORT).show();
+            return false;
+        } else{
+            return true;
+        }
+    }
+
+    public void next(View view){
+        if(verificar()){
+            Intent it = new Intent(this, SegundaActivity.class);
+            String nomeUsuario = nome.getText().toString();
+            it.putExtra("Nome", nomeUsuario);
+
+            startActivity(it);
+        }
     }
 }

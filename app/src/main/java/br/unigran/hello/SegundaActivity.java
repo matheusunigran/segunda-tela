@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SegundaActivity extends AppCompatActivity {
 
@@ -14,15 +15,17 @@ public class SegundaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_segunda);
-        String[] nome = getIntent().getStringArrayExtra("Nome");
+
         msg = findViewById(R.id.idmsg2);
 
-        msg.setText("Olá, "+nome);
+        String nome = getIntent().getStringExtra("Nome");
+        msg.setText("Olá, "+ nome);
     }
 
     public void next(View view){
+        Toast.makeText(this, "Tela em criação", Toast.LENGTH_SHORT).show();
         Intent it = new Intent(this, TerceiraActivity.class);
         startActivity(it);
-        onBackPressed();
+
     }
 }
