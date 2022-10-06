@@ -16,34 +16,24 @@ import br.unigran.hello.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText nome;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        nome = findViewById(R.id.nameid);
     }
-
-    public boolean verificar(){
-        String nomeUsuario = nome.getText().toString();
-
-        if ((nomeUsuario.equals(null) || (nomeUsuario.equals("")))) {
-            Toast.makeText(this, "Adicione um dado", Toast.LENGTH_SHORT).show();
-            return false;
-        } else{
-            return true;
-        }
+    public void cliente(View view){
+        Intent it = new Intent(this, SegundaActivity.class);
+        resultLauncher.launch(it);
     }
-
-    public void next(View view){
-        if(verificar()){
-            Intent it = new Intent(this, SegundaActivity.class);
-            String nomeUsuario = nome.getText().toString();
-            it.putExtra("Nome", nomeUsuario);
-
-            resultLauncher.launch(it);
-        }
+    public void produto(View view){
+        Intent it = new Intent(this, TerceiraActivity.class);
+        resultLauncher.launch(it);
+    }
+    public void fornecedor(View view){
+        Intent it = new Intent(this, QuartaActivity.class);
+        resultLauncher.launch(it);
     }
     ActivityResultLauncher resultLauncher =
             registerForActivityResult(
@@ -56,4 +46,21 @@ public class MainActivity extends AppCompatActivity {
                                         "retorno",Toast.LENGTH_SHORT).show();
                         }
                     });
+
+    public void sair(View view){
+        finish();
+    }
+
+
+    /*public boolean verificar(){
+        String nomeUsuario = nome.getText().toString();
+
+        if ((nomeUsuario.equals(null) || (nomeUsuario.equals("")))) {
+            Toast.makeText(this, "Adicione um dado", Toast.LENGTH_SHORT).show();
+            return false;
+        } else{
+            return true;
+        }
+    }*/
+
 }

@@ -7,4 +7,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_sou_a_primeira_tela">hello sou a primeira tela</string>
     <string name="hello_sou_a_segunda_tela">hello sou a segunda tela</string>
+    <string name="buttonListar">Listar</string>
+    <string name="buttonCadastrar">Cadastrar</string>
+    <string name="btCliente">Cliente</string>
+    <string name="btProduto">Produto</string>
+    <string name="btFornecedores">Fornecedor</string>
+    <string name="btSair">Sair</string>
 </resources>

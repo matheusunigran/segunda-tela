@@ -6,50 +6,49 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
-    <TextView
-        android:id="@+id/idmsg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:minHeight="48dp"
-        android:onClick="next"
-        android:text="@string/perguntanome"
-        app:layout_constraintBottom_toTopOf="@+id/nameid"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/nameid"
+    <LinearLayout
+        android:id="@+id/linearID"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="20dp"
-        android:ems="10"
-        android:hint="@string/dicanome"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:textColorHint="#757575"
-        app:layout_constraintBottom_toTopOf="@+id/btEnviarDadoId"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idmsg" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/btEnviarDadoId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:onClick="next"
-        android:text="@string/btnEnviarNome"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameid" />
+        <Button
+            android:id="@+id/btclienteID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="cliente"
+            android:text="@string/btCliente"
+            tools:ignore="DuplicateSpeakableTextCheck" />
 
+        <Button
+            android:id="@+id/btprodutoID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="produto"
+            android:text="@string/btProduto"
+            tools:ignore="DuplicateSpeakableTextCheck" />
+
+        <Button
+            android:id="@+id/btfornecedorID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="fornecedor"
+            android:text="@string/btFornecedores"
+            tools:ignore="DuplicateSpeakableTextCheck" />
+
+        <Button
+            android:id="@+id/btsairID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="sair"
+            android:text="@string/btSair" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
