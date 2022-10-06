@@ -7,15 +7,23 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import br.unigran.hello.Entidades.Cliente;
 import br.unigran.hello.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link QuartoFragment#newInstance} factory method to
+ * Use the {@link ClienteListaFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class QuartoFragment extends Fragment {
+public class ClienteListaFragment extends Fragment {
+
+    ListView listagem;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +34,7 @@ public class QuartoFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public QuartoFragment() {
+    public ClienteListaFragment() {
         // Required empty public constructor
     }
 
@@ -36,11 +44,11 @@ public class QuartoFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment QuartoFragment.
+     * @return A new instance of fragment ClienteListaFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static QuartoFragment newInstance(String param1, String param2) {
-        QuartoFragment fragment = new QuartoFragment();
+    public static ClienteListaFragment newInstance(String param1, String param2) {
+        ClienteListaFragment fragment = new ClienteListaFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +69,6 @@ public class QuartoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_quarto, container, false);
+        return inflater.inflate(R.layout.fragment_cliente_lista, container, false);
     }
 }

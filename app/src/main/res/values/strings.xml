@@ -13,4 +13,11 @@
     <string name="btProduto">Produto</string>
     <string name="btFornecedores">Fornecedor</string>
     <string name="btSair">Sair</string>
+    <string name="nomeCliente">Informe o nome do Cliente</string>
+    <string name="numeroCliente">Informe o número do Cliente</string>
+    <string name="nomeProduto">Informe o nome do Produto</string>
+    <string name="nomeMarca">Informe a marca do Produto</string>
+    <string name="nomeFornecedor">Informe o nome do Fornecedor</string>
+    <string name="numeroFornecedor">Informe o número do Fornecedor</string>
+    <string name="btSalvarCliente">Salvar Dados</string>
 </resources>

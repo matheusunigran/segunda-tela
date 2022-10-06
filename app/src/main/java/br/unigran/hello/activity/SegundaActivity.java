@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import br.unigran.hello.R;
-import br.unigran.hello.fragmento.Primeiro;
-import br.unigran.hello.fragmento.SegundoFragment;
+import br.unigran.hello.fragmento.CadastroClienteFragment;
+import br.unigran.hello.fragmento.ClienteListaFragment;
 
 public class SegundaActivity extends AppCompatActivity {
 
@@ -18,21 +18,21 @@ public class SegundaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_segunda);
         setResult(80);
 
-        Primeiro primeiro = new Primeiro(); //cria fragmento
+        ClienteListaFragment lista = new ClienteListaFragment(); //cria fragmento
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction(); //cria transação
 
-        transaction.add(R.id.idframe, primeiro); //add fragmento
+        transaction.add(R.id.idframe, lista); //add fragmento
         transaction.commit();//valida adição
 
     }
-    public void segundaTela(View view){
-        getSupportFragmentManager().beginTransaction().//cria transacao
-                replace(R.id.idframe,new SegundoFragment())//add fragmento
-                .commit();//valida a adição
-    }
     public void primeiraTela(View view){
         getSupportFragmentManager().beginTransaction().//cria transacao
-                replace(R.id.idframe,new Primeiro())//add fragmento
+                replace(R.id.idframe,new ClienteListaFragment())//add fragmento
+                .commit();//valida a adição
+    }
+    public void segundaTela(View view){
+        getSupportFragmentManager().beginTransaction().//cria transacao
+                replace(R.id.idframe,new CadastroClienteFragment())//add fragmento
                 .commit();//valida a adição
     }
 }

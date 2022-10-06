@@ -7,8 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 
 import br.unigran.hello.R;
-import br.unigran.hello.fragmento.Primeiro;
-import br.unigran.hello.fragmento.SegundoFragment;
+import br.unigran.hello.fragmento.CadastroFornecedorFragment;
+import br.unigran.hello.fragmento.FornecedorListaFragment;
+import br.unigran.hello.fragmento.ProdutoListaFragment;
+
+/*Eu não sei a razão mas quando clica em fornecedor ele não abre, que seria a QuartaActivity
+ sendo que está igual as outras telas*/
 
 public class QuartaActivity extends AppCompatActivity {
 
@@ -18,21 +22,22 @@ public class QuartaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quarta);
         setResult(80);
 
-        Primeiro primeiro = new Primeiro(); //cria fragmento
+       FornecedorListaFragment lista = new FornecedorListaFragment(); //cria fragmento
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction(); //cria transação
 
-        transaction.add(R.id.idframe, primeiro); //add fragmento
+        transaction.add(R.id.idframe, lista); //add fragmento
         transaction.commit();//valida adição
 
-    }
-    public void segundaTela(View view){
-        getSupportFragmentManager().beginTransaction().//cria transacao
-                replace(R.id.idframe,new SegundoFragment())//add fragmento
-                .commit();//valida a adição
+
     }
     public void primeiraTela(View view){
         getSupportFragmentManager().beginTransaction().//cria transacao
-                replace(R.id.idframe,new Primeiro())//add fragmento
+                replace(R.id.idframe,new FornecedorListaFragment())//add fragmento
+                .commit();//valida a adição
+    }
+    public void segundaTela(View view){
+        getSupportFragmentManager().beginTransaction().//cria transacao
+                replace(R.id.idframe,new CadastroFornecedorFragment())//add fragmento
                 .commit();//valida a adição
     }
 }
