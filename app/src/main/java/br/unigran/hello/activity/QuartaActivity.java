@@ -25,7 +25,6 @@ public class QuartaActivity extends AppCompatActivity {
         transaction.commit();//valida adição
 
     }
-
     public void segundaTela(View view){
         getSupportFragmentManager().beginTransaction().//cria transacao
                 replace(R.id.idframe,new SegundoFragment())//add fragmento

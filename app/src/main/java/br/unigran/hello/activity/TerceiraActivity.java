@@ -3,7 +3,6 @@ package br.unigran.hello.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -26,7 +25,6 @@ public class TerceiraActivity extends AppCompatActivity {
         transaction.commit();//valida adição
 
     }
-
     public void segundaTela(View view){
         getSupportFragmentManager().beginTransaction().//cria transacao
                 replace(R.id.idframe,new SegundoFragment())//add fragmento
@@ -37,5 +35,4 @@ public class TerceiraActivity extends AppCompatActivity {
                 replace(R.id.idframe,new Primeiro())//add fragmento
                 .commit();//valida a adição
     }
-
 }
