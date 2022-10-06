@@ -3,4 +3,8 @@
     <string name="dicanome">Informe o seu nome</string>
     <string name="perguntanome">Olá! Qual é o seu nome?</string>
     <string name="btnEnviarNome">Enviar dado</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_sou_a_primeira_tela">hello sou a primeira tela</string>
+    <string name="hello_sou_a_segunda_tela">hello sou a segunda tela</string>
 </resources>

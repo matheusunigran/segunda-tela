@@ -1,4 +1,4 @@
-package br.unigran.hello;
+package br.unigran.hello.activity;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import br.unigran.hello.R;
 
 public class MainActivity extends AppCompatActivity {
 
