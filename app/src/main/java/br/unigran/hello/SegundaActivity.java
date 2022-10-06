@@ -15,6 +15,7 @@ public class SegundaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_segunda);
+        setResult(80);
 
         msg = findViewById(R.id.idmsg2);
 

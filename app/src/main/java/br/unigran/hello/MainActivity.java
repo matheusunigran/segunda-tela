@@ -1,5 +1,9 @@
 package br.unigran.hello;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -36,7 +40,18 @@ public class MainActivity extends AppCompatActivity {
             String nomeUsuario = nome.getText().toString();
             it.putExtra("Nome", nomeUsuario);
 
-            startActivity(it);
+            resultLauncher.launch(it);
         }
     }
+    ActivityResultLauncher resultLauncher =
+            registerForActivityResult(
+                    new ActivityResultContracts.StartActivityForResult(),
+                    new ActivityResultCallback<ActivityResult>(){
+                        @Override
+                        public void onActivityResult(ActivityResult result) {
+                            if(result.getResultCode()==80)
+                                Toast.makeText(getApplicationContext(),
+                                        "retorno",Toast.LENGTH_SHORT).show();
+                        }
+                    });
 }
