@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Hello"
         tools:targetApi="31">
         <activity
-            android:name=".QuartaActivity"
+            android:name=".activity.QuartaActivity"
             android:exported="false" />
         <activity
             android:name=".activity.TerceiraActivity"
