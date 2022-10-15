@@ -9,10 +9,6 @@ import android.view.View;
 import br.unigran.hello.R;
 import br.unigran.hello.fragmento.CadastroFornecedorFragment;
 import br.unigran.hello.fragmento.FornecedorListaFragment;
-import br.unigran.hello.fragmento.ProdutoListaFragment;
-
-/*Eu não sei a razão mas quando clica em fornecedor ele não abre, que seria a QuartaActivity
- sendo que está igual as outras telas*/
 
 public class QuartaActivity extends AppCompatActivity {
 

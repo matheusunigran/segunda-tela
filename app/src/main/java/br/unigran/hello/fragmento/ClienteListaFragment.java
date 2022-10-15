@@ -15,6 +15,8 @@ import java.util.List;
 
 import br.unigran.hello.Entidades.Cliente;
 import br.unigran.hello.R;
+import br.unigran.hello.bancoDados.ClienteDB;
+import br.unigran.hello.bancoDados.DBHelper;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,8 +24,10 @@ import br.unigran.hello.R;
  * create an instance of this fragment.
  */
 public class ClienteListaFragment extends Fragment {
-
-    ListView listagem;
+    ClienteDB clienteDB;
+    DBHelper db;
+    List<Cliente> dados;
+    ListView clienteList;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -69,6 +73,21 @@ public class ClienteListaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cliente_lista, container, false);
+        View view =  inflater.inflate(R.layout.fragment_cliente_lista, container, false);
+
+        clienteList = (ListView) view.findViewById(R.id.listviewFornecedorID);
+        dados = new ArrayList<>();
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(
+                getActivity(),
+                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, dados);
+        clienteList.setAdapter(arrayAdapter);
+
+        db = new DBHelper(getActivity());
+        clienteDB = new ClienteDB(db);
+
+        clienteDB.lista(dados);
+
+        return view;
     }
 }

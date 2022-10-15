@@ -7,17 +7,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import br.unigran.hello.Entidades.Cliente;
 import br.unigran.hello.Entidades.Fornecedor;
 import br.unigran.hello.R;
-import br.unigran.hello.bancoDados.ClienteDB;
-import br.unigran.hello.bancoDados.DBHelperCliente;
-import br.unigran.hello.bancoDados.DBHelperFornecedor;
+import br.unigran.hello.bancoDados.DBHelper;
 import br.unigran.hello.bancoDados.FornecedorDB;
 
 /**
@@ -27,12 +23,11 @@ import br.unigran.hello.bancoDados.FornecedorDB;
  */
 public class CadastroFornecedorFragment extends Fragment {
 
-
     EditText nome;
     EditText numero;
-    List<Cliente> dados;
+    Button btsalvar;
 
-    DBHelperFornecedor db;
+    DBHelper db;
     FornecedorDB fornecedorDB;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -82,41 +77,55 @@ public class CadastroFornecedorFragment extends Fragment {
 
         if ((nomeCliente.equals(null) || nomeCliente.equals(null) || numeroCliente.equals(null))
                 || (numeroCliente.equals(""))) {
+            Toast.makeText(getActivity(), "Preencha os dados", Toast.LENGTH_SHORT).show();
             return false;
         } else {
             return true;
         }
     }
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
-        /*View view = inflater.inflate(R.layout.fragment_cadastro_cliente, container, false);
-        nome = view.findViewById(R.id.nomeID);
-        numero = view.findViewById(R.id.marcaID);
-        dados = new ArrayList<>();
-
-        //db = new DBHelperCliente(this);
-
-        fornecedorDB = new FornecedorDB(db);
-        fornecedorDB.lista(dados);//lista incial
-
-        return view;*/
-
-        return inflater.inflate(R.layout.fragment_cadastro_fornecedor, container, false);
-    }
-
-    public void salvar(View view) {
-        if (verificar()) {
+    public void salvar() {
+        if(verificar()){
             Fornecedor fornecedor = new Fornecedor();
 
             fornecedor.setNome(nome.getText().toString());
             fornecedor.setNumero(numero.getText().toString());
 
             fornecedorDB.inserir(fornecedor);
-            fornecedorDB.lista(dados);
+            Toast.makeText(getActivity(), "Dados salvos com sucesso!", Toast.LENGTH_SHORT).show();
 
+            // Redirect to list fragment
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.idframe, new FornecedorListaFragment())
+                    .addToBackStack(null)
+                    .commit();
         }
+    }
+    private void limpar() {
+        nome.setText("");
+        numero.setText("");
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_cadastro_fornecedor, container, false);
+
+        db = new DBHelper(getActivity());
+        fornecedorDB = new FornecedorDB(db);
+        nome = view.findViewById(R.id.nomeID);
+        numero = view.findViewById(R.id.numeroID);
+        btsalvar = view.findViewById(R.id.btCadastrarFornecedorID);
+
+        btsalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                salvar();
+                limpar();
+            }
+        });
+        return view;
     }
 }

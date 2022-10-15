@@ -13,9 +13,6 @@ import android.widget.Toast;
 
 import br.unigran.hello.R;
 
-/*Eu não sei a razão mas quando clica em fornecedor ele não abre, que seria a QuartaActivity
- sendo que está igual as outras telas*/
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -44,17 +41,9 @@ public class MainActivity extends AppCompatActivity {
                         public void onActivityResult(ActivityResult result) {
                             if(result.getResultCode()==80)
                                 Toast.makeText(getApplicationContext(),
-                                        "retorno",Toast.LENGTH_SHORT).show();
+                                        "menu",Toast.LENGTH_SHORT).show();
                         }
                     });
-    /*ActivityResultLauncher resultLauncher =
-            registerForActivityResult(
-                    new ActivityResultContracts.StartActivityForResult(),
-                    result -> {
-                        if(result.getResultCode()==80)
-                            Toast.makeText(getApplicationContext(),
-                                    "retorno",Toast.LENGTH_SHORT).show();
-                    });*/
 
     public void sair(View view){
         finish();

@@ -31,9 +31,7 @@ public class Fornecedor {
 
     @Override
     public String toString() {
-        return "Fornecedor{" +
-                "nome='" + nome + '\'' +
-                ", numero='" + numero + '\'' +
-                '}';
+        return "nome='" + nome + '\'' +
+                ", numero='" + numero;
     }
 }

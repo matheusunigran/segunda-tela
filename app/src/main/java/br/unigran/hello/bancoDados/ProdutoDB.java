@@ -9,9 +9,9 @@ import java.util.List;
 import br.unigran.hello.Entidades.Produto;
 
 public class ProdutoDB {
-    private DBHelperProduto db;
+    private DBHelper db;
     private SQLiteDatabase conexao;
-    public ProdutoDB(DBHelperProduto db){
+    public ProdutoDB(DBHelper db){
         this.db=db;
     }
     public void inserir(Produto produto){
@@ -19,7 +19,7 @@ public class ProdutoDB {
         ContentValues valores = new ContentValues();
         valores.put("nome",produto.getNome());
         valores.put("marca",produto.getMarca());
-        conexao.insertOrThrow("Produto",null,valores);
+        conexao.insertOrThrow("produto",null,valores);
         conexao.close();
     }
     public void atualizar(Produto produto){
@@ -27,19 +27,19 @@ public class ProdutoDB {
         ContentValues valores = new ContentValues();
         valores.put("nome",produto.getNome());
         valores.put("marca",produto.getMarca());
-        conexao.update("Produto",valores, "id=?", new String[]{produto.getId().toString()});
+        conexao.update("produto",valores, "id=?", new String[]{produto.getId().toString()});
         conexao.close();
     }
     public void remover(int id){
         conexao=db.getWritableDatabase();
-        conexao.delete("Produto","id=?",
+        conexao.delete("produto","id=?",
                 new String[]{id+""});
     }
     public void lista(List dados){
         dados.clear();
         conexao=db.getReadableDatabase();
         String names[]={"id","nome","marca"};
-        Cursor query = conexao.query("Produto", names,
+        Cursor query = conexao.query("produto", names,
                 null, null, null,
                 null, "nome");
         while (query.moveToNext()){

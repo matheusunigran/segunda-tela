@@ -7,16 +7,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import br.unigran.hello.Entidades.Cliente;
 import br.unigran.hello.R;
 import br.unigran.hello.bancoDados.ClienteDB;
-import br.unigran.hello.bancoDados.DBHelperCliente;
+import br.unigran.hello.bancoDados.DBHelper;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,13 +25,10 @@ public class CadastroClienteFragment extends Fragment {
 
     EditText nome;
     EditText numero;
-    List<Cliente> dados;
+    Button btsalvar;
 
-    DBHelperCliente db;
+    DBHelper db;
     ClienteDB clienteDB;
-
-
-
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -81,43 +76,54 @@ public class CadastroClienteFragment extends Fragment {
 
         if ((nomeCliente.equals(null) || nomeCliente.equals(null) || numeroCliente.equals(null))
                 || (numeroCliente.equals(""))) {
+            Toast.makeText(getActivity(), "Preencha os dados", Toast.LENGTH_SHORT).show();
             return false;
         } else {
             return true;
         }
     }
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
-        /*View view = inflater.inflate(R.layout.fragment_cadastro_cliente, container, false);
-        nome = view.findViewById(R.id.nomeID);
-        numero = view.findViewById(R.id.marcaID);
-        dados = new ArrayList<>();
-
-        //db = new DBHelperCliente(this);
-
-        clienteDB = new ClienteDB(db);
-        clienteDB.lista(dados);//lista incial
-
-        return view;*/
-
-        return inflater.inflate(R.layout.fragment_cadastro_cliente, container, false);
-    }
-
-    public void salvar(View view) {
-        if (verificar()) {
+    public void salvar() {
+       if(verificar()){
             Cliente cliente = new Cliente();
 
             cliente.setNome(nome.getText().toString());
             cliente.setNumero(numero.getText().toString());
 
             clienteDB.inserir(cliente);
-            clienteDB.lista(dados);
+            Toast.makeText(getActivity(), "Dados salvos com sucesso!", Toast.LENGTH_SHORT).show();
 
+            // Redirect to list fragment
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.idframe, new ClienteListaFragment())
+                    .addToBackStack(null)
+                    .commit();
         }
     }
+    private void limpar() {
+        nome.setText("");
+        numero.setText("");
+    }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_cadastro_cliente, container, false);
 
+        db = new DBHelper(getActivity());
+        clienteDB = new ClienteDB(db);
+        nome = view.findViewById(R.id.nomeID);
+        numero = view.findViewById(R.id.numeroID);
+        btsalvar = view.findViewById(R.id.btCadastrarFornecedorID);
 
+        btsalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                salvar();
+                limpar();
+            }
+        });
+        return view;
+    }
 }

@@ -9,9 +9,9 @@ import java.util.List;
 import br.unigran.hello.Entidades.Fornecedor;
 
 public class FornecedorDB {
-    private DBHelperFornecedor db;
+    private DBHelper db;
     private SQLiteDatabase conexao;
-    public FornecedorDB(DBHelperFornecedor db){
+    public FornecedorDB(DBHelper db){
         this.db=db;
     }
     public void inserir(Fornecedor fornecedor){
@@ -19,27 +19,27 @@ public class FornecedorDB {
         ContentValues valores = new ContentValues();
         valores.put("nome",fornecedor.getNome());
         valores.put("numero",fornecedor.getNumero());
-        conexao.insertOrThrow("Fornecedor",null,valores);
+        conexao.insertOrThrow("fornecedor",null,valores);
         conexao.close();
     }
     public void atualizar(Fornecedor fornecedor){
         conexao = db.getWritableDatabase();
         ContentValues valores = new ContentValues();
         valores.put("nome",fornecedor.getNome());
-        valores.put("telefone",fornecedor.getNumero());
-        conexao.update("Fornecedor",valores, "id=?", new String[]{fornecedor.getId().toString()});
+        valores.put("numero",fornecedor.getNumero());
+        conexao.update("fornecedor",valores, "id=?", new String[]{fornecedor.getId().toString()});
         conexao.close();
     }
     public void remover(int id){
         conexao=db.getWritableDatabase();
-        conexao.delete("Fornecedor","id=?",
+        conexao.delete("fornecedor","id=?",
                 new String[]{id+""});
     }
     public void lista(List dados){
         dados.clear();
         conexao=db.getReadableDatabase();
         String names[]={"id","nome","numero"};
-        Cursor query = conexao.query("Fornecedor", names,
+        Cursor query = conexao.query("fornecedor", names,
                 null, null, null,
                 null, "nome");
         while (query.moveToNext()){

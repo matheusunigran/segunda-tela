@@ -7,18 +7,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import br.unigran.hello.Entidades.Cliente;
-import br.unigran.hello.Entidades.Fornecedor;
 import br.unigran.hello.Entidades.Produto;
 import br.unigran.hello.R;
-import br.unigran.hello.bancoDados.DBHelperFornecedor;
-import br.unigran.hello.bancoDados.DBHelperProduto;
-import br.unigran.hello.bancoDados.FornecedorDB;
+import br.unigran.hello.bancoDados.DBHelper;
 import br.unigran.hello.bancoDados.ProdutoDB;
 
 /**
@@ -30,9 +25,9 @@ public class CadastroProdutoFragment extends Fragment {
 
     EditText nome;
     EditText marca;
-    List<Cliente> dados;
+    Button btsalvar;
 
-    DBHelperProduto db;
+    DBHelper db;
     ProdutoDB produtoDB;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -82,40 +77,54 @@ public class CadastroProdutoFragment extends Fragment {
 
         if ((nomeProduto.equals(null) || nomeProduto.equals(null) || marcaProduto.equals(null))
                 || (marcaProduto.equals(""))) {
+            Toast.makeText(getActivity(), "Preencha os dados", Toast.LENGTH_SHORT).show();
             return false;
         } else {
             return true;
         }
     }
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
-        /*View view = inflater.inflate(R.layout.fragment_cadastro_cliente, container, false);
-        nome = view.findViewById(R.id.nomeID);
-        marca = view.findViewById(R.id.marcaID);
-        dados = new ArrayList<>();
-        //db = new DBHelperCliente(this);
-
-        produtoDB = new ProdutoDB(db);
-        produtoDB.lista(dados);//lista incial
-
-        return view;*/
-
-        return inflater.inflate(R.layout.fragment_cadastro_produto, container, false);
-    }
-
-    public void salvar(View view) {
-        if (verificar()) {
+    public void salvar() {
+        if(verificar()){
             Produto produto = new Produto();
 
             produto.setNome(nome.getText().toString());
             produto.setMarca(marca.getText().toString());
 
             produtoDB.inserir(produto);
-            produtoDB.lista(dados);
+            Toast.makeText(getActivity(), "Dados salvos com sucesso!", Toast.LENGTH_SHORT).show();
 
+            // Redirect to list fragment
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.idframe, new ProdutoListaFragment())
+                    .addToBackStack(null)
+                    .commit();
         }
+    }
+    private void limpar() {
+        nome.setText("");
+        marca.setText("");
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_cadastro_produto, container, false);
+        db = new DBHelper(getActivity());
+        produtoDB = new ProdutoDB(db);
+        nome = view.findViewById(R.id.nomeID);
+        marca = view.findViewById(R.id.numeroID);
+        btsalvar = view.findViewById(R.id.btCadastrarFornecedorID);
+
+        btsalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                salvar();
+                limpar();
+            }
+        });
+        return view;
     }
 }

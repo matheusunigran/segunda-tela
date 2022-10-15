@@ -6,7 +6,7 @@
     tools:context=".fragmento.ClienteListaFragment">
 
     <ListView
-        android:id="@+id/listviewID"
+        android:id="@+id/listviewFornecedorID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </FrameLayout>

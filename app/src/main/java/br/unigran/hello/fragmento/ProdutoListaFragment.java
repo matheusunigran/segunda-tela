@@ -7,8 +7,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import br.unigran.hello.Entidades.Produto;
 import br.unigran.hello.R;
+import br.unigran.hello.bancoDados.DBHelper;
+import br.unigran.hello.bancoDados.ProdutoDB;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +24,10 @@ import br.unigran.hello.R;
  * create an instance of this fragment.
  */
 public class ProdutoListaFragment extends Fragment {
+    ProdutoDB produtoDB;
+    DBHelper db;
+    List<Produto> dados;
+    ListView produtoList;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +73,21 @@ public class ProdutoListaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_produto_lista, container, false);
+        View view = inflater.inflate(R.layout.fragment_produto_lista, container, false);
+
+        produtoList = (ListView) view.findViewById(R.id.listviewFornecedorID);
+        dados = new ArrayList<>();
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(
+                getActivity(),
+                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, dados);
+        produtoList.setAdapter(arrayAdapter);
+
+        db = new DBHelper(getActivity());
+        produtoDB = new ProdutoDB(db);
+
+        produtoDB.lista(dados);
+
+        return view;
     }
 }

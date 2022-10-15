@@ -9,9 +9,9 @@ import java.util.List;
 import br.unigran.hello.Entidades.Cliente;
 
 public class ClienteDB {
-    private DBHelperCliente db;
+    private DBHelper db;
     private SQLiteDatabase conexao;
-    public ClienteDB(DBHelperCliente db){
+    public ClienteDB(DBHelper db){
         this.db=db;
     }
     public void inserir(Cliente cliente){
@@ -19,27 +19,27 @@ public class ClienteDB {
         ContentValues valores = new ContentValues();
         valores.put("nome",cliente.getNome());
         valores.put("numero",cliente.getNumero());
-        conexao.insertOrThrow("Cliente",null,valores);
+        conexao.insertOrThrow("cliente",null,valores);
         conexao.close();
     }
     public void atualizar(Cliente cliente){
         conexao = db.getWritableDatabase();
         ContentValues valores = new ContentValues();
         valores.put("nome",cliente.getNome());
-        valores.put("telefone",cliente.getNumero());
-        conexao.update("Cliente",valores, "id=?", new String[]{cliente.getId().toString()});
+        valores.put("numero",cliente.getNumero());
+        conexao.update("cliente",valores, "id=?", new String[]{cliente.getId().toString()});
         conexao.close();
     }
     public void remover(int id){
         conexao=db.getWritableDatabase();
-        conexao.delete("Cliente","id=?",
+        conexao.delete("cliente","id=?",
                 new String[]{id+""});
     }
     public void lista(List dados){
         dados.clear();
         conexao=db.getReadableDatabase();
         String names[]={"id","nome","numero"};
-        Cursor query = conexao.query("Cliente", names,
+        Cursor query = conexao.query("cliente", names,
                 null, null, null,
                 null, "nome");
         while (query.moveToNext()){
